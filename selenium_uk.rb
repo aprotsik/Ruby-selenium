@@ -4,8 +4,6 @@ require 'selenium-webdriver'
 
 driver = Selenium::WebDriver.for :firefox
 site_url = "http://www.thomascook.com"
-
-msg = 
 retval = 0
 
 driver.manage.window.maximize
