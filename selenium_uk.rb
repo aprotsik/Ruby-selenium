@@ -5,7 +5,7 @@ require 'selenium-webdriver'
 driver = Selenium::WebDriver.for :firefox
 site_url = "http://www.thomascook.com"
 
-msg = "UK is well !"
+msg = 
 retval = 0
 
 driver.manage.window.maximize
@@ -18,8 +18,7 @@ begin
   driver.navigate.to site_url
 rescue
   driver.save_screenshot("./#{Time.now.strftime("Failure__%d.%m.%Y__%H:%M:%S")}.png")
-  msg = "Error loading #{login_url}"
-  puts msg	
+  puts "Error loading #{login_url}"	
   driver.quit
   exit 5
 end
@@ -31,8 +30,7 @@ begin
   Searchbutton.click
 rescue
   driver.save_screenshot("./#{Time.now.strftime("Failure__%d.%m.%Y__%H:%M:%S")}.png")
-  msg = "Error clicking search"
-  puts msg	
+  puts "Error clicking search"
   driver.quit
   exit 5
 end
@@ -44,8 +42,7 @@ begin
   Detailsbutton.click
 rescue
   driver.save_screenshot("./#{Time.now.strftime("Failure__%d.%m.%Y__%H:%M:%S")}.png")
-  msg = "Error clicking details"
-  puts msg	
+  puts "Error clicking details"	
   driver.quit
   exit 5
 end
@@ -57,8 +54,7 @@ begin
   Bookbutton.click
 rescue
   driver.save_screenshot("./#{Time.now.strftime("Failure__%d.%m.%Y__%H:%M:%S")}.png")	
-  msg = "Error clicking book now"
-  puts msg
+  puts "Error clicking book now"
   driver.quit
   exit 5
 end
@@ -72,13 +68,12 @@ begin
   driver.save_screenshot("./#{Time.now.strftime("Success__%d.%m.%Y__%H:%M:%S")}.png")
 rescue
   driver.save_screenshot("./#{Time.now.strftime("Failure__%d.%m.%Y__%H:%M:%S")}.png")
-  msg = "Error proceeding to forms"	
-  puts msg
+  puts "Error proceeding to forms"	
   driver.quit
   exit 5
 end
 
-puts msg
+puts "UK is well!"
 
 driver.close
 driver.quit
