@@ -23,9 +23,9 @@ driver.manage.timeouts.page_load = 120
 driver.manage.timeouts.implicit_wait = 120 
 
 def teardown(headless,driver,screenfile,vidfile,retval)
-  driver.save_screenshot("#{screenfile}")
+  driver.save_screenshot("mail/#{screenfile}")
   #headless.video.stop_and_save("#{vidfile}")
-  FileUtils.cp("#{screenfile}", "mail")
+  #FileUtils.cp("#{screenfile}", "mail")
   #FileUtils.cp("#{vidfile}", "mail")
   driver.quit
   headless.destroy
