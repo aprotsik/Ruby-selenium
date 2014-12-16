@@ -103,8 +103,8 @@ end
 begin
   url = driver.current_url
   driver.save_screenshot("mail/Hotel_#{screenfile}")
-  Bookbuton = driver.find_element(:id, "bookNow")
-  Bookbuton.click
+  Bookbutton = driver.find_element(:id, "bookNow")
+  Bookbutton.click
   Extras = driver.find_element(:id, "submit-extras")
   Extras.click 
 rescue => exception
