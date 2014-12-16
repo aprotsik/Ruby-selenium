@@ -19,8 +19,8 @@ FileUtils.mkdir_p 'mail'
 FileUtils.rm_rf(Dir.glob('mail/*'))
 
 driver.manage.window.maximize
-driver.manage.timeouts.page_load = 120
-driver.manage.timeouts.implicit_wait = 120 
+driver.manage.timeouts.page_load = 60
+driver.manage.timeouts.implicit_wait = 60 
 
 def teardown(headless,driver,screenfile,vidfile,retval)
   driver.save_screenshot("mail/#{screenfile}")
