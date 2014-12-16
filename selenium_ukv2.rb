@@ -5,8 +5,8 @@ require 'headless'
 require 'fileutils'
 
 headless = Headless.new
-#headless.start
-#headless.video.start_capture
+headless.start
+headless.video.start_capture
 client = Selenium::WebDriver::Remote::Http::Default.new
 client.timeout = 300
 driver = Selenium::WebDriver.for(:firefox, :http_client => client) 
