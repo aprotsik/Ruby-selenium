@@ -80,7 +80,6 @@ end
 # Click the first details button
 begin
   url = driver.current_url
-  driver.save_screenshot("mail/Searchlist_#{screenfile}")
   Detailsbutton = driver.find_element(:xpath, "//button[@class='btn btn-success detailsBtn ng-binding']")
   Detailsbutton.click
 rescue => exception
@@ -102,7 +101,6 @@ end
 #Click Book now
 begin
   url = driver.current_url
-  driver.save_screenshot("mail/Hotel_#{screenfile}")
   Bookbutton = driver.find_element(:id, "bookNow")
   Bookbutton.click
   Extras = driver.find_element(:id, "submit-extras")
@@ -126,7 +124,6 @@ end
 # Continue to signing forms
 begin
   url = driver.current_url
-  driver.save_screenshot("mail/Customize_#{screenfile}")
   Continuebutton = driver.find_element(:id, "submit-extras")
   Continuebutton.location_once_scrolled_into_view
   Continuebutton.click
@@ -149,7 +146,6 @@ end
 # Fill the passenger details
 begin
   url = driver.current_url
-  driver.save_screenshot("mail/Passengers_#{screenfile}")
   Selenium::WebDriver::Support::Select.new(driver.find_element(:id => "title")).select_by :text, "Mr"
   driver.find_element(:id, "name").send_keys "Luke"
   driver.find_element(:id, "surname").send_keys "Skywalker"
@@ -192,7 +188,6 @@ begin
   Selenium::WebDriver::Support::Select.new(driver.find_element(:id => "year2Room1")).select_by :text, "1992"
   Confirmbuttonsecond = driver.find_element(:id, "paxSubmit")
   Confirmbuttonsecond.click
-  sleep 10
 
 rescue => exception
   retry_count -= 1
