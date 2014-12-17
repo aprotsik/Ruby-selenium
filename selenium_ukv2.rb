@@ -192,8 +192,7 @@ begin
   Selenium::WebDriver::Support::Select.new(driver.find_element(:id => "year2Room1")).select_by :text, "1992"
   Confirmbuttonsecond = driver.find_element(:id, "paxSubmit")
   Confirmbuttonsecond.click
-
-  driver.save_screenshot("mail/Payment_#{screenfile}")
+  sleep 10
 
 rescue => exception
   retry_count -= 1
