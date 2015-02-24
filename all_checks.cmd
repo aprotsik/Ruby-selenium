@@ -6,7 +6,6 @@ ruby scripts/neckermann_nl.rb
 ruby scripts/neckermann-reisen_de.rb
 ruby scripts/oneweb_thomascook_com.rb
 ruby scripts/thomascook_be.rb
-ruby scripts/thomascook_com_v1.rb
 ruby scripts/thomascook_com_v2.rb
 ruby scripts/thomascook_de.rb
 ruby scripts/thomascook_nl.rb
