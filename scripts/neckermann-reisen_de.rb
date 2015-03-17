@@ -85,7 +85,7 @@ end
 # Click the first details button
 begin
   url = driver.current_url
-  driver.find_element(:xpath, "//a[@class='brand-arrow-btn-sm mg-t2']").click
+  driver.find_element(:xpath, "//p[@class='brand-arrow-btn-md-alt mg-tb6 mg-l6']").click
 rescue => exception
   retry_count -= 1
   if retry_count > 0
