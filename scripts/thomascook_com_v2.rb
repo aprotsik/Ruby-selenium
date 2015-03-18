@@ -128,8 +128,8 @@ end
 # Fill the passenger details
 begin
   url = driver.current_url
-  sleep 2
-  driver.find_element(:id => "title").click
+  #sleep 1
+  #driver.find_element(:id => "title").click
   Selenium::WebDriver::Support::Select.new(driver.find_element(:id => "title")).select_by :text, "Mr"
   driver.find_element(:id, "name").send_keys "Luke"
   driver.find_element(:id, "surname").send_keys "Skywalker"
@@ -137,15 +137,15 @@ begin
   driver.find_element(:id, "leadPassengerConfirmEmail").send_keys "jediknight@gmail.com"
   Postcode = driver.find_element(:id, "postCode")
   Postcode.location_once_scrolled_into_view
-  Postcode.send_keys "GU249DQ"
+  Postcode.send_keys "E7 9AL"
   driver.find_element(:xpath, "//a[@class='btn btn-default get-address']").click
   sleep 5
-  Selenium::WebDriver::Support::Select.new(driver.find_element(:id => "addressSelect")).select_by :text, "1 PILGRIMS WAY"
+  Selenium::WebDriver::Support::Select.new(driver.find_element(:id => "addressSelect")).select_by :text, "1 EARLHAM GROVE"
 
   City = driver.find_element(:id, "city")
   City.location_once_scrolled_into_view
-  unless City.attribute('value').include? "WOKING"
-    fail "City box does not contain WOKING"
+  unless City.attribute('value').include? "LONDON"
+    fail "City box does not contain LONDON"
   end
 
   CountryDropdown = driver.find_element(:id, "country")
@@ -159,7 +159,7 @@ begin
   Selenium::WebDriver::Support::Select.new(driver.find_element(:id => "month")).select_by :text, "June"
   Selenium::WebDriver::Support::Select.new(driver.find_element(:id => "year")).select_by :text, "1990"
   driver.find_element(:id, "contactNumber").send_keys "020 7219 4272"
-  driver.find_element(:xpath, "//a[@class='btn btn-success noArrow pax-confirm ng-binding']").click
+  driver.find_element(:xpath, "//a[@class='btn btn-success noArrow pax-confirm']").click
 
   Selenium::WebDriver::Support::Select.new(driver.find_element(:id => "title2Room1")).select_by :text, "Mrs"
   driver.find_element(:id, "name2Room1").send_keys "Mara"
