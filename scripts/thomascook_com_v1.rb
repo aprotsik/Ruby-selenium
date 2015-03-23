@@ -14,8 +14,8 @@ FileUtils.mkdir_p 'thomascook.com_v1'
 FileUtils.rm_rf(Dir.glob('thomascook.com_v1/*'))
 
 driver.manage.window.maximize
-driver.manage.timeouts.page_load = 120
-driver.manage.timeouts.implicit_wait = 120 
+driver.manage.timeouts.page_load = 30
+driver.manage.timeouts.implicit_wait = 30 
 
 def teardown(driver,screenfile,retval)
   driver.save_screenshot("thomascook.com_v1/#{screenfile}")
