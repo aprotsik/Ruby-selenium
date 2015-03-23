@@ -14,8 +14,8 @@ FileUtils.mkdir_p 'directholidays.co.uk'
 FileUtils.rm_rf(Dir.glob('directholidays.co.uk/*'))
 
 driver.manage.window.maximize
-driver.manage.timeouts.page_load = 60
-driver.manage.timeouts.implicit_wait = 60 
+driver.manage.timeouts.page_load = 30
+driver.manage.timeouts.implicit_wait = 30 
 
 def teardown(driver,screenfile,retval)
   driver.save_screenshot("directholidays.co.uk/#{screenfile}")
