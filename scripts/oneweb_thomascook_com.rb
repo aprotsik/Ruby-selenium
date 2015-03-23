@@ -65,6 +65,10 @@ end
 # Click Search
 begin
   url = driver.current_url
+  time = Time.now + (4*7*24*60*60)
+  date = time.strftime("%d-%m-%Y")
+  driver.find_element(:id, "pkgtoDateRange").clear()
+  driver.find_element(:id, "pkgtoDateRange").send_keys "#{date}"
   driver.find_element(:id, "pkgProductSearch").click
 rescue => exception
   retry_count -= 1
