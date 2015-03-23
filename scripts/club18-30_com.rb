@@ -16,8 +16,8 @@ FileUtils.mkdir_p 'club18-30.com'
 FileUtils.rm_rf(Dir.glob('club18-30.com/*'))
 
 driver.manage.window.maximize
-driver.manage.timeouts.page_load = 60
-driver.manage.timeouts.implicit_wait = 60 
+driver.manage.timeouts.page_load = 30
+driver.manage.timeouts.implicit_wait = 30 
 
 def teardown(driver,screenfile,retval)
   driver.save_screenshot("club18-30.com/#{screenfile}")
