@@ -83,10 +83,15 @@ ensure
   retry_count = 5
 end
 
+url = driver.current_url
 #Click Book now
+if url.include? "NadDetailPage"
+
 begin
-  url = driver.current_url
-  driver.find_element(:id, "calcbuttonspan_calctransport").click
+  #url = driver.current_url
+  driver.find_element(:id, "#tabBar-Prices2").click
+  driver.find_element(:xpath, "//a[@data-room='1']").click
+  driver.find_element(:id, "priceTicket-submitButton").click
 rescue => exception
   retry_count -= 1
   if retry_count > 0
@@ -103,9 +108,11 @@ ensure
   retry_count = 5
 end
 
-#Click another Book now
+else
+
 begin
-  url = driver.current_url
+  #url = driver.current_url
+  driver.find_element(:id, "calcbuttonspan_calctransport").click
   driver.find_element(:xpath, "//span[@class='label bookNowButton']").click
 rescue => exception
   retry_count -= 1
@@ -121,6 +128,8 @@ rescue => exception
   end
 ensure
   retry_count = 5
+end
+
 end
 
 # Fill the passenger details
