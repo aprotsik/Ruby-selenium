@@ -88,9 +88,8 @@ url = driver.current_url
 if url.include? "NadDetailPage"
 
 begin
-  #url = driver.current_url
   driver.find_element(:id, "#tabBar-Prices2").click
-  driver.find_element(:xpath, "//a[@data-room='1']").click
+  driver.find_element(:xpath, "//div[3]/div[2]/ul[2]/li/a").click
   driver.find_element(:id, "priceTicket-submitButton").click
 rescue => exception
   retry_count -= 1
@@ -111,8 +110,7 @@ end
 else
 
 begin
-  #url = driver.current_url
-  driver.find_element(:id, "calcbuttonspan_calctransport").click
+  driver.find_element(:id, "calcbuttonspan_extra").click
   driver.find_element(:xpath, "//span[@class='label bookNowButton']").click
 rescue => exception
   retry_count -= 1
