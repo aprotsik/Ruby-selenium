@@ -129,8 +129,8 @@ end
 # Accept terms & Click continue booking
 begin
   url = driver.current_url
-  driver.find_element(:id, "errataTerms").click
-  driver.find_element(:id, "acceptErata").click
+  #driver.find_element(:id, "errataTerms").click
+  #driver.find_element(:id, "acceptErata").click
   driver.find_element(:id, "continueButton").click
 rescue => exception
   retry_count -= 1
