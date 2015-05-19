@@ -189,12 +189,17 @@ begin
 
   Postcode = driver.find_element(:id, "postcode")
   Postcode.location_once_scrolled_into_view
-  Postcode.send_keys "GU249DQ"
+  Postcode.send_keys "GU24 9DQ"
 
   driver.find_element(:id, "findAddressButton").click
   sleep 5
 
-  Street = driver.find_element(:id, "streetAddress")
+  driver.find_element(:id, "contactNumber").send_keys "02072194272"
+  driver.find_element(:id, "email").send_keys "jediknight@gmail.com"
+  driver.find_element(:id, "confirmEmail").send_keys "jediknight@gmail.com"
+  
+
+    Street = driver.find_element(:id, "streetAddress")
   Street.location_once_scrolled_into_view
   unless Street.attribute('value').include? "PILGRIMS WAY"
     fail "Street box does not contain WOKING"
@@ -214,12 +219,8 @@ begin
   end
 
   driver.find_element(:id, "houseNumber").send_keys "1"
-  driver.find_element(:id, "contactNumber").send_keys "02072194272"
-  driver.find_element(:id, "email").send_keys "jediknight@gmail.com"
-  driver.find_element(:id, "confirmEmail").send_keys "jediknight@gmail.com"
   driver.find_element(:xpath, "//input[@value='CONTINUE']").click
-
-
+  
 rescue => exception
   ret_ind = true
   while ret_ind == true do 

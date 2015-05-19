@@ -190,14 +190,19 @@ begin
 
   Postcode = driver.find_element(:id, "postcode")
   Postcode.location_once_scrolled_into_view
-  Postcode.send_keys "GU249DQ"
-
+  Postcode.send_keys "GU24 9DQ"
+  
   Findbutton = driver.find_element(:id, "findAddressButton")
   Findbutton.location_once_scrolled_into_view
   Findbutton.click
   sleep 5
 
   #Selenium::WebDriver::Support::Select.new(driver.find_element(:id => "addressSelect")).select_by :text, "1 PILGRIMS WAY"
+
+  driver.find_element(:id, "contactNumber").send_keys "02072194272"
+  driver.find_element(:id, "email").send_keys "jediknight@gmail.com"
+  driver.find_element(:id, "confirmEmail").send_keys "jediknight@gmail.com"
+  
 
   Street = driver.find_element(:id, "streetAddress")
   Street.location_once_scrolled_into_view
@@ -219,11 +224,8 @@ begin
   end
 
   driver.find_element(:id, "houseNumber").send_keys "1"
-  driver.find_element(:id, "contactNumber").send_keys "02072194272"
-  driver.find_element(:id, "email").send_keys "jediknight@gmail.com"
-  driver.find_element(:id, "confirmEmail").send_keys "jediknight@gmail.com"
-  driver.find_element(:xpath, "//input[@value='CONTINUE']").click
 
+  driver.find_element(:xpath, "//input[@value='CONTINUE']").click
 
 rescue => exception
   ret_ind = true
