@@ -49,8 +49,8 @@ end
 # Click search button
 begin
   url = driver.current_url
-  driver.find_element(:id, "st_popup_acceptButton").click
-  driver.find_element(:id, "QsmListerOrFullTextSearch_/sitecore/content/eComHome/Configuration/Channels/Main/Pages/Home/QSM_amount").click
+  #driver.find_element(:id, "st_popup_acceptButton").click
+  driver.find_element(:id, "QsmListerOrFullTextSearch_/sitecore/content/eComHome/Configuration/Channels/Main/Pages/Home/QSM_label").click
 rescue => exception
   ret_ind = true
   while ret_ind == true do 
@@ -78,9 +78,15 @@ rescue => exception
   end
 end
 
+# Click pop-up
+begin
+  wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+  wait.until { driver.find_element(:id, "st_popup_acceptButton").click }
+rescue => exception
+end
+
 # Click the first details button
 begin
-  url = driver.current_url
   driver.find_element(:xpath, "//span[@class='label']").click
 rescue => exception
   ret_ind = true
@@ -115,7 +121,7 @@ if url.include? "NadDetailPage"
 
 begin
   driver.find_element(:id, "#tabBar-Prices2").click
-  driver.find_element(:xpath, "//div[4]/div[2]/ul[2]/li/a").click
+  driver.find_element(:xpath, "(//a[contains(@data-room, '1')])").click
   driver.find_element(:id, "priceTicket-submitButton").click
 rescue => exception
   ret_ind = true
@@ -147,7 +153,7 @@ end
 else
 
 begin
-  driver.find_element(:id, "calcbuttonspan_calctransport").click
+  driver.find_element(:id, "calcbuttonspan_extra").click
   driver.find_element(:xpath, "//span[@class='label bookNowButton']").click
 rescue => exception
   ret_ind = true
@@ -189,7 +195,7 @@ begin
   Selenium::WebDriver::Support::Select.new(driver.find_element(:id => "TravellerDetails_1_days")).select_by :text, "13"
   Selenium::WebDriver::Support::Select.new(driver.find_element(:id => "TravellerDetails_1_months")).select_by :text, "juni"
   Selenium::WebDriver::Support::Select.new(driver.find_element(:id => "TravellerDetails_1_years")).select_by :text, "1990"
- # driver.find_element(:id => "TravellerDetails_2_gender").click
+  #driver.find_element(:id => "TravellerDetails_2_gender").click
   Selenium::WebDriver::Support::Select.new(driver.find_element(:id => "TravellerDetails_2_gender")).select_by :text, "Vrouw"
   driver.find_element(:id, "TravellerDetails_2_firstName").send_keys "Mara"
   driver.find_element(:id, "TravellerDetails_2_lastName").send_keys "Skywalker"

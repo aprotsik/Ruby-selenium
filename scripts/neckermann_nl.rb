@@ -116,7 +116,7 @@ if url.include? "NadDetailPage"
 begin
   #url = driver.current_url
   driver.find_element(:id, "#tabBar-Prices2").click
-  driver.find_element(:xpath, "//div[4]/div[2]/ul[2]/li/a").click
+  driver.find_element(:xpath, "(//a[contains(@data-room, '1')])").click
   driver.find_element(:id, "priceTicket-submitButton").click
 rescue => exception
   ret_ind = true
