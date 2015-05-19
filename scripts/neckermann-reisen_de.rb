@@ -143,8 +143,8 @@ end
 #Click Strange pre-book button
 begin
   url = driver.current_url
-  driver.find_element(:id, "PO_0").click
-  driver.find_element(:id, "mohit0").click
+  driver.find_element(:xpath, "//a[@class='btn btn-primary mg-t2 pull-right pd-b2']").click
+  driver.find_element(:xpath, "//a[@class='brand-arrow-btn-md mg-t2']").click
 rescue => exception
   ret_ind = true
   while ret_ind == true do 
