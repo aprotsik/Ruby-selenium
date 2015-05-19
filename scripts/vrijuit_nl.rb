@@ -187,22 +187,33 @@ end
 # Fill the passenger details
 begin
   url = driver.current_url
-  #driver.find_element(:id => "TravellerDetails_1_gender").click
+  driver.find_element(:id => "TravellerDetails_1_gender").click
   Selenium::WebDriver::Support::Select.new(driver.find_element(:id => "TravellerDetails_1_gender")).select_by :value, "Male"
   driver.find_element(:id, "TravellerDetails_1_firstName").send_keys "Luke"
   driver.find_element(:id, "TravellerDetails_1_lastName").send_keys "Skywalker"
-  #driver.find_element(:id => "TravellerDetails_1_days").click
+  driver.find_element(:id => "TravellerDetails_1_days").click
   Selenium::WebDriver::Support::Select.new(driver.find_element(:id => "TravellerDetails_1_days")).select_by :text, "13"
   Selenium::WebDriver::Support::Select.new(driver.find_element(:id => "TravellerDetails_1_months")).select_by :text, "juni"
   Selenium::WebDriver::Support::Select.new(driver.find_element(:id => "TravellerDetails_1_years")).select_by :text, "1990"
-  #driver.find_element(:id => "TravellerDetails_2_gender").click
-  Selenium::WebDriver::Support::Select.new(driver.find_element(:id => "TravellerDetails_2_gender")).select_by :text, "Vrouw"
+  driver.find_element(:id => "TravellerDetails_2_gender").click
+  Selenium::WebDriver::Support::Select.new(driver.find_element(:id => "TravellerDetails_2_gender")).select_by :value, "Female"
   driver.find_element(:id, "TravellerDetails_2_firstName").send_keys "Mara"
   driver.find_element(:id, "TravellerDetails_2_lastName").send_keys "Skywalker"
-  #driver.find_element(:id => "TravellerDetails_2_days").click
+  driver.find_element(:id => "TravellerDetails_2_days").click
   Selenium::WebDriver::Support::Select.new(driver.find_element(:id => "TravellerDetails_2_days")).select_by :text, "25"
   Selenium::WebDriver::Support::Select.new(driver.find_element(:id => "TravellerDetails_2_months")).select_by :text, "apr"
   Selenium::WebDriver::Support::Select.new(driver.find_element(:id => "TravellerDetails_2_years")).select_by :text, "1992"
+  
+  Gender = driver.find_element(:id, "TravellerDetails_1_gender")
+  unless Gender.attribute('value').include? "Male"
+    fail "Some values are missing!"
+  end
+
+  Gender1 = driver.find_element(:id, "TravellerDetails_2_gender")
+  unless Gender1.attribute('value').include? "Female"
+    fail "Some values are missing!"
+  end
+
   driver.find_element(:id, "foSubmit").click
 
 rescue => exception
