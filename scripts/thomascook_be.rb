@@ -2,13 +2,15 @@
 
 require 'selenium-webdriver'
 require 'fileutils'
+require 'io/console'
 
 client = Selenium::WebDriver::Remote::Http::Default.new
 client.timeout = 300
 driver = Selenium::WebDriver.for(:firefox, :http_client => client) 
 retval = 0
 screenfile = "#{Time.now.strftime("%d.%m.%Y__%H'%M'%S")}.jpg"
-retry_count = 5
+ret_ind = true
+screen_count = 1
 
 FileUtils.mkdir_p 'thomascook.be'
 FileUtils.rm_rf(Dir.glob('thomascook.be/*'))
@@ -18,48 +20,62 @@ driver.manage.timeouts.page_load = 30
 driver.manage.timeouts.implicit_wait = 30 
 
 def teardown(driver,screenfile,retval)
+  sleep 5
   driver.save_screenshot("thomascook.be/#{screenfile}")
   driver.quit
   exit retval  
 end
 
+def read_char
+  STDIN.echo = false
+  STDIN.raw!
+ 
+  input = STDIN.getc.chr
+  if input == "\e" then
+    input << STDIN.read_nonblock(3) rescue nil
+    input << STDIN.read_nonblock(2) rescue nil
+  end
+ensure
+  STDIN.cooked!
+  return input
+end
+
 
 
 # Access thomascook.be/reizen/alles.aspx
-begin
+
   driver.navigate.to "http://www.thomascook.be/reizen/alles.aspx"
-rescue => exception
-  retry_count -= 1
-  if retry_count > 0
-    retry
-  else
-    retval = 5
-    puts exception.backtrace
-    puts "Died loading http://www.thomascook.be/reizen/alles.aspx"
-    teardown(driver,screenfile,retval)
-  end
-ensure
-  retry_count = 5
-end
+
 
 # Click search button
 begin
   url = driver.current_url
   driver.find_element(:id, "QsmListerOrFullTextSearch_/sitecore/content/eComHome/Configuration/common/Components/QSM/VelocityQsmLarge_amount").click
 rescue => exception
-  retry_count -= 1
-  if retry_count > 0
-    driver.navigate.refresh
-    retry
-  else
-    retval = 5
-    puts exception.backtrace
-    puts "Died on #{url}"
-    screenfile = "Fail_#{Time.now.strftime("%d.%m.%Y__%H'%M'%S")}.jpg"
-    teardown(driver,screenfile,retval)
+  ret_ind = true
+  while ret_ind == true do 
+  puts "Exceptional situation occurred. What do you want to do? Press 'r' to retry, do the step manually and then press 'n' to move to the next step, press 's' to capture screenshot, press 't' to terminate the script."
+   c = read_char
+  case c
+    when "r"
+      puts "Retrying..."
+      driver.navigate.refresh
+      retry
+    when "n"
+      puts "Proceeding to the next step..."
+      ret_ind = false
+    when "t"
+      puts "Executing teardown..."
+      retval = 5
+      teardown(driver,screenfile,retval)
+    when "s"
+      puts "Capturing screenshot..."
+      driver.save_screenshot("thomascook.be/#{screen_count}_#{screenfile}")
+      screen_count += 1
+    else
+      puts "Character not recognized! Please push some of those, mantioned in the description!"  
+    end
   end
-ensure
-  retry_count = 5
 end
 
 # Click the first details button
@@ -67,19 +83,30 @@ begin
   url = driver.current_url
   driver.find_element(:css, "#QsmDetailLink_1 > span.label").click
 rescue => exception
-  retry_count -= 1
-  if retry_count > 0
-    driver.navigate.refresh
-    retry
-  else
-    retval = 5
-    puts exception.backtrace
-    puts "Died on #{url}"
-    screenfile = "Fail_#{Time.now.strftime("%d.%m.%Y__%H'%M'%S")}.jpg"
-    teardown(driver,screenfile,retval)
+  ret_ind = true
+  while ret_ind == true do 
+  puts "Exceptional situation occurred. What do you want to do? Press 'r' to retry, do the step manually and then press 'n' to move to the next step, press 's' to capture screenshot, press 't' to terminate the script."
+   c = read_char
+  case c
+    when "r"
+      puts "Retrying..."
+      driver.navigate.refresh
+      retry
+    when "n"
+      puts "Proceeding to the next step..."
+      ret_ind = false
+    when "t"
+      puts "Executing teardown..."
+      retval = 5
+      teardown(driver,screenfile,retval)
+    when "s"
+      puts "Capturing screenshot..."
+      driver.save_screenshot("thomascook.be/#{screen_count}_#{screenfile}")
+      screen_count += 1
+    else
+      puts "Character not recognized! Please push some of those, mantioned in the description!"  
+    end
   end
-ensure
-  retry_count = 5
 end
 
 #Click Book now
@@ -87,19 +114,30 @@ begin
   url = driver.current_url
   driver.find_element(:id, "calcbuttonspan_calc").click
 rescue => exception
-  retry_count -= 1
-  if retry_count > 0
-    driver.navigate.refresh
-    retry
-  else
-    retval = 5
-    puts exception.backtrace
-    puts "Died on #{url}"
-    screenfile = "Fail_#{Time.now.strftime("%d.%m.%Y__%H'%M'%S")}.jpg"
-    teardown(driver,screenfile,retval)
+  ret_ind = true
+  while ret_ind == true do 
+  puts "Exceptional situation occurred. What do you want to do? Press 'r' to retry, do the step manually and then press 'n' to move to the next step, press 's' to capture screenshot, press 't' to terminate the script."
+   c = read_char
+  case c
+    when "r"
+      puts "Retrying..."
+      driver.navigate.refresh
+      retry
+    when "n"
+      puts "Proceeding to the next step..."
+      ret_ind = false
+    when "t"
+      puts "Executing teardown..."
+      retval = 5
+      teardown(driver,screenfile,retval)
+    when "s"
+      puts "Capturing screenshot..."
+      driver.save_screenshot("thomascook.be/#{screen_count}_#{screenfile}")
+      screen_count += 1
+    else
+      puts "Character not recognized! Please push some of those, mantioned in the description!"  
+    end
   end
-ensure
-  retry_count = 5
 end
 
 #Click another Book now
@@ -107,19 +145,30 @@ begin
   url = driver.current_url
   driver.find_element(:xpath, "//span[@class='label bookNowButton']").click
 rescue => exception
-  retry_count -= 1
-  if retry_count > 0
-    driver.navigate.refresh
-    retry
-  else
-    retval = 5
-    puts exception.backtrace
-    puts "Died on #{url}"
-    screenfile = "Fail_#{Time.now.strftime("%d.%m.%Y__%H'%M'%S")}.jpg"
-    teardown(driver,screenfile,retval)
+  ret_ind = true
+  while ret_ind == true do 
+  puts "Exceptional situation occurred. What do you want to do? Press 'r' to retry, do the step manually and then press 'n' to move to the next step, press 's' to capture screenshot, press 't' to terminate the script."
+   c = read_char
+  case c
+    when "r"
+      puts "Retrying..."
+      driver.navigate.refresh
+      retry
+    when "n"
+      puts "Proceeding to the next step..."
+      ret_ind = false
+    when "t"
+      puts "Executing teardown..."
+      retval = 5
+      teardown(driver,screenfile,retval)
+    when "s"
+      puts "Capturing screenshot..."
+      driver.save_screenshot("thomascook.be/#{screen_count}_#{screenfile}")
+      screen_count += 1
+    else
+      puts "Character not recognized! Please push some of those, mantioned in the description!"  
+    end
   end
-ensure
-  retry_count = 5
 end
 
 # Fill the passenger details
@@ -139,6 +188,7 @@ begin
   Selenium::WebDriver::Support::Select.new(driver.find_element(:id => "TravellerDetails_2_years")).select_by :text, "1992"
   driver.find_element(:id, "foSubmit").click
 rescue => exception
+  ret_ind = true
   retry_count -= 1
   if retry_count > 0
     driver.navigate.refresh
@@ -159,19 +209,30 @@ begin
   url = driver.current_url
   driver.find_element(:id, "btnNext").click
 rescue => exception
-  retry_count -= 1
-  if retry_count > 0
-    driver.navigate.refresh
-    retry
-  else
-    retval = 5
-    puts exception.backtrace
-    puts "Died on #{url}"
-    screenfile = "Fail_#{Time.now.strftime("%d.%m.%Y__%H'%M'%S")}.jpg"
-    teardown(driver,screenfile,retval)
+  ret_ind = true
+  while ret_ind == true do 
+  puts "Exceptional situation occurred. What do you want to do? Press 'r' to retry, do the step manually and then press 'n' to move to the next step, press 's' to capture screenshot, press 't' to terminate the script."
+   c = read_char
+  case c
+    when "r"
+      puts "Retrying..."
+      driver.navigate.refresh
+      retry
+    when "n"
+      puts "Proceeding to the next step..."
+      ret_ind = false
+    when "t"
+      puts "Executing teardown..."
+      retval = 5
+      teardown(driver,screenfile,retval)
+    when "s"
+      puts "Capturing screenshot..."
+      driver.save_screenshot("thomascook.be/#{screen_count}_#{screenfile}")
+      screen_count += 1
+    else
+      puts "Character not recognized! Please push some of those, mantioned in the description!"  
+    end
   end
-ensure
-  retry_count = 5
 end
 
 # Fill the passenger details (more)
@@ -188,19 +249,30 @@ begin
   driver.find_element(:id, "toPaymentButton").click
 
 rescue => exception
-  retry_count -= 1
-  if retry_count > 0
-    driver.navigate.refresh
-    retry
-  else
-    retval = 5
-    puts exception.backtrace
-    puts "Died on #{url}"
-    screenfile = "Fail_#{Time.now.strftime("%d.%m.%Y__%H'%M'%S")}.jpg"
-    teardown(driver,screenfile,retval)
+  ret_ind = true
+  while ret_ind == true do 
+  puts "Exceptional situation occurred. What do you want to do? Press 'r' to retry, do the step manually and then press 'n' to move to the next step, press 's' to capture screenshot, press 't' to terminate the script."
+   c = read_char
+  case c
+    when "r"
+      puts "Retrying..."
+      driver.navigate.refresh
+      retry
+    when "n"
+      puts "Proceeding to the next step..."
+      ret_ind = false
+    when "t"
+      puts "Executing teardown..."
+      retval = 5
+      teardown(driver,screenfile,retval)
+    when "s"
+      puts "Capturing screenshot..."
+      driver.save_screenshot("thomascook.be/#{screen_count}_#{screenfile}")
+      screen_count += 1
+    else
+      puts "Character not recognized! Please push some of those, mantioned in the description!"  
+    end
   end
-ensure
-  retry_count = 5
 end
 
 puts "thomascook.be/reizen/alles.aspx is well!"

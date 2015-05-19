@@ -1,3 +1,4 @@
+git pull
 ruby scripts/airtours_co_uk.rb
 ruby scripts/club18-30_com.rb
 ruby scripts/directholidays_co_uk.rb
