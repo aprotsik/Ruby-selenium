@@ -153,7 +153,7 @@ end
 else
 
 begin
-  driver.find_element(:id, "calcbuttonspan_extra").click
+  driver.find_element(:id, "calcbuttonspan_calctransport").click
   driver.find_element(:xpath, "//span[@class='label bookNowButton']").click
 rescue => exception
   ret_ind = true
