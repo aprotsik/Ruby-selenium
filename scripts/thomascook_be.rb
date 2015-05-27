@@ -81,6 +81,8 @@ end
 # Click the first details button
 begin
   url = driver.current_url
+  Selenium::WebDriver::Support::Select.new(driver.find_element(:id => "QsmChangeSelect_prXmonth")).select_by :index, "4"
+  sleep 3
   driver.find_element(:css, "#QsmDetailLink_1 > span.label").click
 rescue => exception
   ret_ind = true
