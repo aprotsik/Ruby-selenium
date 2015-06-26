@@ -44,13 +44,15 @@ end
 
 # Access neckermann.nl
 
-  driver.navigate.to "http://neckermann.nl"
+  driver.navigate.to "http://neckermann.nl/vlieg-vakanties.aspx"
 
 # Click search button
 begin
   url = driver.current_url
-  driver.find_element(:id, "st_popup_acceptButton").click
-  driver.find_element(:id, "QsmListerOrFullTextSearch_/sitecore/content/eComHome/Configuration/Channels/algemeen/Pages/Home/QSM_label").click
+  wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+  wait.until { driver.find_element(:id, "st_popup_acceptButton").click }
+  wait.until { driver.find_element(:xpath, "//a[@class='goBack close grey']").click }
+  driver.find_element(:id, "QsmListerOrFullTextSearch_/sitecore/content/eComHome/Configuration/Common/Components/Solr/EQsmHomeFlight").click
 rescue => exception
   ret_ind = true
   while ret_ind == true do 
