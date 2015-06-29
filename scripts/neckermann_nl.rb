@@ -51,8 +51,8 @@ begin
   url = driver.current_url
   wait = Selenium::WebDriver::Wait.new(:timeout => 5)
   wait.until { driver.find_element(:id, "st_popup_acceptButton").click }
-  wait.until { driver.find_element(:xpath, "//a[@class='goBack close grey']").click }
-  driver.find_element(:id, "QsmListerOrFullTextSearch_/sitecore/content/eComHome/Configuration/Common/Components/Solr/EQsmHomeFlight").click
+  #wait.until { driver.find_element(:xpath, "//a[@class='goBack close grey']").click }
+  driver.find_element(:id, "QsmListerOrFullTextSearch_/sitecore/content/eComHome/Configuration/Common/Components/Solr/EQsmHomeFlight_label").click
 rescue => exception
   ret_ind = true
   while ret_ind == true do 
