@@ -49,9 +49,12 @@ end
 # Click search button
 begin
   url = driver.current_url
-  driver.find_element(:xpath, "//a[contains(@href, '/search/?question=&pageNum=1&searchId=&categoryId=cat633832&pageId=Rel55-491057&sortingBy=RECOMMENDED&sortOrder=DESC&pageSize=&dbTrail=&trail=99012%3AV%7CAIR1')]").click
-  
+  #sleep 5
+  #driver.find_element(:id, "bBookNow").location_once_scrolled_into_view
+  #driver.find_element(:id, "bBookNow").click
+  driver.navigate.to "http://www.airtours.co.uk/search/?question=&pageNum=1&searchId=&categoryId=cat633832&pageId=Rel55-491057&sortingBy=RECOMMENDED&sortOrder=DESC&pageSize=&dbTrail=&trail=99012%3AV|AIR1"
 rescue => exception
+  puts "#{exception}"
   ret_ind = true
   while ret_ind == true do 
   puts "Exceptional situation occurred. What do you want to do? Press 'r' to retry, do the step manually and then press 'n' to move to the next step, press 's' to capture screenshot, press 't' to terminate the script."
