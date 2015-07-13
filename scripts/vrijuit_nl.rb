@@ -50,6 +50,7 @@ end
 begin
   url = driver.current_url
   #driver.find_element(:id, "st_popup_acceptButton").click
+  Selenium::WebDriver::Support::Select.new(driver.find_element(:id => "qsmNumberOfChildren")).select_by :value, "0"
   driver.find_element(:id, "QsmListerOrFullTextSearch_/sitecore/content/eComHome/Configuration/Channels/Main/Pages/Home/QSM_label").click
 rescue => exception
   ret_ind = true
@@ -153,7 +154,7 @@ end
 else
 
 begin
-  driver.find_element(:id, "calcbuttonspan_extra").click
+  driver.find_element(:id, "calcbuttonspan_calctransport").click
   driver.find_element(:xpath, "//span[@class='label bookNowButton']").click
 rescue => exception
   ret_ind = true

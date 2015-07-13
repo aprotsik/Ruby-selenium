@@ -50,6 +50,7 @@ end
 # Click search button
 begin
   url = driver.current_url
+  Selenium::WebDriver::Support::Select.new(driver.find_element(:id => "qsmNumberOfChildren_room_1")).select_by :value, "0"
   driver.find_element(:id, "QsmListerOrFullTextSearch_/sitecore/content/eComHome/Configuration/Common/Components/Redesign/SOLR/QSM_label").click
 rescue => exception
   ret_ind = true
@@ -144,6 +145,7 @@ end
 # Fill the passenger details
 begin
   url = driver.current_url
+  sleep 5
   driver.find_element(:id => "TravellerDetails_1_gender").click
   Selenium::WebDriver::Support::Select.new(driver.find_element(:id => "TravellerDetails_1_gender")).select_by :value, "Male"
   driver.find_element(:id, "TravellerDetails_1_firstName").send_keys "Luke"
