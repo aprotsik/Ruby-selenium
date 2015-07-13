@@ -45,6 +45,107 @@ end
 # Access directholidays.co.uk
 
   driver.navigate.to "http://www.directholidays.co.uk"
+  url = driver.current_url
+
+if url.include? "ww7"
+
+begin
+  url = driver.current_url
+  driver.find_element(:class, "custom-select-label-container").click
+  driver.find_element(:xpath, "//li[contains(., 'London - All Airports - (LON)')]").click
+  driver.find_element(:xpath, "(//div[@class='custom-select-label-container'])[2]").click
+  driver.find_element(:xpath, "//li[contains(., 'Majorca - (PMI)')]").click
+  driver.find_element(:name, "searchButton").click
+rescue => exception
+  ret_ind = true
+  while ret_ind == true do 
+  puts "Exceptional situation occurred. What do you want to do? Press 'r' to retry, do the step manually and then press 'n' to move to the next step, press 's' to capture screenshot, press 't' to terminate the script."
+   c = read_char
+  case c
+    when "r"
+      puts "Retrying..."
+      driver.navigate.refresh
+      retry
+    when "n"
+      puts "Proceeding to the next step..."
+      ret_ind = false
+    when "t"
+      puts "Executing teardown..."
+      retval = 5
+      teardown(driver,screenfile,retval)
+    when "s"
+      puts "Capturing screenshot..."
+      driver.save_screenshot("directholidays.co.uk/#{screen_count}_#{screenfile}")
+      screen_count += 1
+    else
+      puts "Character not recognized! Please push some of those, mantioned in the description!"  
+    end
+  end
+end
+
+# Click Details
+begin
+  url = driver.current_url
+  driver.find_element(:name, "conflictResolvePanel:placeHolder:form:costButton").click
+rescue => exception
+  ret_ind = true
+  while ret_ind == true do 
+  puts "Exceptional situation occurred. What do you want to do? Press 'r' to retry, do the step manually and then press 'n' to move to the next step, press 's' to capture screenshot, press 't' to terminate the script."
+   c = read_char
+  case c
+    when "r"
+      puts "Retrying..."
+      driver.navigate.refresh
+      retry
+    when "n"
+      puts "Proceeding to the next step..."
+      ret_ind = false
+    when "t"
+      puts "Executing teardown..."
+      retval = 5
+      teardown(driver,screenfile,retval)
+    when "s"
+      puts "Capturing screenshot..."
+      driver.save_screenshot("directholidays.co.uk/#{screen_count}_#{screenfile}")
+      screen_count += 1
+    else
+      puts "Character not recognized! Please push some of those, mantioned in the description!"  
+    end
+  end
+end
+
+# Continue to signing forms
+begin
+  url = driver.current_url
+  driver.find_element(:name, "checkoutFlow:next").click
+rescue => exception
+  ret_ind = true
+  while ret_ind == true do 
+  puts "Exceptional situation occurred. What do you want to do? Press 'r' to retry, do the step manually and then press 'n' to move to the next step, press 's' to capture screenshot, press 't' to terminate the script."
+   c = read_char
+  case c
+    when "r"
+      puts "Retrying..."
+      driver.navigate.refresh
+      retry
+    when "n"
+      puts "Proceeding to the next step..."
+      ret_ind = false
+    when "t"
+      puts "Executing teardown..."
+      retval = 5
+      teardown(driver,screenfile,retval)
+    when "s"
+      puts "Capturing screenshot..."
+      driver.save_screenshot("directholidays.co.uk/#{screen_count}_#{screenfile}")
+      screen_count += 1
+    else
+      puts "Character not recognized! Please push some of those, mantioned in the description!"  
+    end
+  end
+end
+
+else
 
 # Click search button
 begin
@@ -246,6 +347,8 @@ rescue => exception
       puts "Character not recognized! Please push some of those, mantioned in the description!"  
     end
   end
+end
+
 end
 
 puts "directholidays.co.uk is well!"
