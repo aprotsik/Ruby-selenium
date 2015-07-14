@@ -82,8 +82,7 @@ end
 
 # Click the first details button
 begin
-  wait = Selenium::WebDriver::Wait.new(:timeout => 5)
-  wait.until { driver.find_element(:id, "st_popup_acceptButton").click }
+  driver.find_element(:id, "st_popup_acceptButton").click
   driver.find_element(:xpath, "//span[@class='label']").click
 rescue => exception
   ret_ind = true
@@ -181,6 +180,7 @@ end
 
 end
 
+if driver.find_element(:class => "booking-personalia-contactperson").text.include? "contactpersoon"
 # Fill the passenger details
 begin
   url = driver.current_url
@@ -245,6 +245,7 @@ begin
   url = driver.current_url
   driver.find_element(:id, "btnNext").click
 rescue => exception
+  puts "#{exception}"
   ret_ind = true
   while ret_ind == true do 
   puts "Exceptional situation occurred. What do you want to do? Press 'r' to retry, do the step manually and then press 'n' to move to the next step, press 's' to capture screenshot, press 't' to terminate the script."
@@ -342,6 +343,76 @@ rescue => exception
       puts "Character not recognized! Please push some of those, mantioned in the description!"  
     end
   end
+end
+
+else
+
+begin
+  url = driver.current_url
+  driver.find_element(:class => "radio").click
+  driver.find_element(:id, "TravellerDetails_1_firstName").clear
+  driver.find_element(:id, "TravellerDetails_1_firstName").send_keys "Luke"
+  driver.find_element(:id, "TravellerDetails_1_lastName").clear
+  driver.find_element(:id, "TravellerDetails_1_lastName").send_keys "Skywalker"
+  driver.find_element(:id => "TravellerDetails_1_days").click
+  Selenium::WebDriver::Support::Select.new(driver.find_element(:id => "TravellerDetails_1_days")).select_by :text, "13"
+  Selenium::WebDriver::Support::Select.new(driver.find_element(:id => "TravellerDetails_1_months")).select_by :text, "juni"
+  Selenium::WebDriver::Support::Select.new(driver.find_element(:id => "TravellerDetails_1_years")).select_by :text, "1990"
+  driver.find_element(:xpath, "(//label[@class='radio'])[4]").click
+  driver.find_element(:id, "TravellerDetails_2_firstName").clear
+  driver.find_element(:id, "TravellerDetails_2_firstName").send_keys "Mara"
+  driver.find_element(:id, "TravellerDetails_2_lastName").clear
+  driver.find_element(:id, "TravellerDetails_2_lastName").send_keys "Skywalker"
+  driver.find_element(:id => "TravellerDetails_2_days").click
+  Selenium::WebDriver::Support::Select.new(driver.find_element(:id => "TravellerDetails_2_days")).select_by :text, "25"
+  Selenium::WebDriver::Support::Select.new(driver.find_element(:id => "TravellerDetails_2_months")).select_by :text, "apr"
+  Selenium::WebDriver::Support::Select.new(driver.find_element(:id => "TravellerDetails_2_years")).select_by :text, "1992"
+
+  driver.find_element(:id, "foSubmit").click
+  sleep 5
+  driver.find_element(:id, "btnNext").click
+
+  driver.find_element(:id, "TravellerDetails_1_street").send_keys "Rokin"
+  driver.find_element(:id, "TravellerDetails_1_houseNumber").send_keys "1"
+  driver.find_element(:id, "TravellerDetails_1_zipCode").send_keys "1012 KT"
+  driver.find_element(:id, "TravellerDetails_1_city").send_keys "Amsterdam"
+  driver.find_element(:id, "TravellerDetails_1_phoneNumber").send_keys "+31 30 2357822"
+  driver.find_element(:id, "TravellerDetails_1_email1").send_keys "luke.skywalker@gmail.com"
+  driver.find_element(:id, "ConfirmEmailAddress").send_keys "luke.skywalker@gmail.com"
+  driver.find_element(:id, "emergencyContact").send_keys "Obiwan"
+  driver.find_element(:id, "emergencyPhoneNumber").send_keys "+31 30 2357822"
+  driver.find_element(:id, "toPaymentButton").click
+  driver.find_element(:xpath, "//label[contains(., 'Ik ga akkoord met de reisvoorwaarden')]").click
+  driver.find_element(:id, "defaultPaymentAgreed").click
+
+rescue => exception
+  puts "#{exception}"
+  ret_ind = true
+  while ret_ind == true do 
+  puts "Exceptional situation occurred. What do you want to do? Press 'r' to retry, do the step manually and then press 'n' to move to the next step, press 's' to capture screenshot, press 't' to terminate the script."
+   c = read_char
+  case c
+    when "r"
+      puts "Retrying..."
+      driver.navigate.refresh
+      retry
+    when "n"
+      puts "Proceeding to the next step..."
+      ret_ind = false
+    when "t"
+      puts "Executing teardown..."
+      retval = 5
+      teardown(driver,screenfile,retval)
+    when "s"
+      puts "Capturing screenshot..."
+      driver.save_screenshot("vrijuit.nl/#{screen_count}_#{screenfile}")
+      screen_count += 1
+    else
+      puts "Character not recognized! Please push some of those, mantioned in the description!"  
+    end
+  end
+end
+
 end
 
 puts "vrijuit.nl is well!"
