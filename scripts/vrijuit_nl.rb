@@ -50,6 +50,7 @@ end
 begin
   url = driver.current_url
   #driver.find_element(:id, "st_popup_acceptButton").click
+  Selenium::WebDriver::Support::Select.new(driver.find_element(:id => "qsmNumberOfAdults")).select_by :value, "2"
   Selenium::WebDriver::Support::Select.new(driver.find_element(:id => "qsmNumberOfChildren")).select_by :value, "0"
   driver.find_element(:id, "QsmListerOrFullTextSearch_/sitecore/content/eComHome/Configuration/Channels/Main/Pages/Home/QSM_label").click
 rescue => exception
@@ -79,15 +80,10 @@ rescue => exception
   end
 end
 
-# Click pop-up
+# Click the first details button
 begin
   wait = Selenium::WebDriver::Wait.new(:timeout => 5)
   wait.until { driver.find_element(:id, "st_popup_acceptButton").click }
-rescue => exception
-end
-
-# Click the first details button
-begin
   driver.find_element(:xpath, "//span[@class='label']").click
 rescue => exception
   ret_ind = true

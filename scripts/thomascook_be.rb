@@ -50,6 +50,7 @@ end
 # Click search button
 begin
   url = driver.current_url
+  Selenium::WebDriver::Support::Select.new(driver.find_element(:id => "qsmNumberOfAdults")).select_by :value, "2"
   Selenium::WebDriver::Support::Select.new(driver.find_element(:id => "qsmNumberOfChildren")).select_by :value, "0"
   driver.find_element(:id, "QsmListerOrFullTextSearch_/sitecore/content/eComHome/Configuration/common/Components/QSM/VelocityQsmLarge_amount").click
 rescue => exception
