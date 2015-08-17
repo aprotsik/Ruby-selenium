@@ -55,7 +55,7 @@ begin
   driver.find_element(:xpath, "//a[@title='Next']").click
   end
   driver.find_element(:xpath, "//a[@class='ui-state-default']").click
-  driver.find_element(:id, "searchBtn").click
+  driver.find_element(:id, "SearchbarForm-submitBtn").click
 rescue => exception
   puts "#{exception}"
   ret_ind = true
@@ -87,7 +87,7 @@ end
 # Click the first details button
 begin
   url = driver.current_url
-  driver.find_element(:xpath, "//button[@class='btn btn-success detailsBtn ng-binding']").click
+  driver.find_element(:xpath, "//a[@class='btn btn-success detailsBtn']").click
 rescue => exception
   ret_ind = true
   while ret_ind == true do 
