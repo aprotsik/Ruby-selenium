@@ -52,7 +52,17 @@ end
 # Click search button
 begin
   url = driver.current_url
-  driver.find_element(:id, "bBookNow").click
+  driver.find_element(:xpath, "//div[@class='custom-select departurePoint airportSelect']").click
+  driver.find_element(:xpath, "//li[contains(text(), 'London - All Airports - (LON)')]").click
+  driver.find_element(:xpath, "//div[@class='custom-select airportSelect']").click
+  driver.find_element(:xpath, "//li[contains(text(), 'Kardamena, Kos - (KGS)')]").click
+
+  #driver.find_element(:name, "checkInDate").click
+  #2.times do
+  #driver.find_element(:xpath, "//a[@title='Next']").click
+  #end
+  #driver.find_element(:xpath, "//a[@class='ui-state-default']").click
+  driver.find_element(:name, "searchButton").click
 rescue => exception
   ret_ind = true
   while ret_ind == true do 
@@ -83,7 +93,7 @@ end
 # Click the first details button
 begin
   url = driver.current_url
-  driver.find_element(:xpath, "//a[@onclick='showAccomodationWaitPage(event)']").click
+  driver.find_element(:name, "conflictResolvePanel:placeHolder:form:costButton").click
 rescue => exception
   ret_ind = true
   while ret_ind == true do 
@@ -114,118 +124,7 @@ end
 #Click Book now
 begin
   url = driver.current_url
-  driver.find_element(:id, "bookNowLink_1").click
-rescue => exception
-  ret_ind = true
-  while ret_ind == true do 
-  puts "Exceptional situation occurred. What do you want to do? Press 'r' to retry, do the step manually and then press 'n' to move to the next step, press 's' to capture screenshot, press 't' to terminate the script."
-   c = read_char
-  case c
-    when "r"
-      puts "Retrying..."
-      driver.navigate.refresh
-      retry
-    when "n"
-      puts "Proceeding to the next step..."
-      ret_ind = false
-    when "t"
-      puts "Executing teardown..."
-      retval = 5
-      teardown(driver,screenfile,retval)
-    when "s"
-      puts "Capturing screenshot..."
-      driver.save_screenshot("club18-30.com/#{screen_count}_#{screenfile}")
-      screen_count += 1
-    else
-      puts "Character not recognized! Please push some of those, mantioned in the description!"
-    end
-  end
-end
-
-# Continue to signing forms
-begin
-  url = driver.current_url
-  driver.find_element(:xpath, "//a[@class='btn nextBtn btn-sec']").click
-rescue => exception
-  ret_ind = true
-  while ret_ind == true do 
-  puts "Exceptional situation occurred. What do you want to do? Press 'r' to retry, do the step manually and then press 'n' to move to the next step, press 's' to capture screenshot, press 't' to terminate the script."
-   c = read_char
-  case c
-    when "r"
-      puts "Retrying..."
-      driver.navigate.refresh
-      retry
-    when "n"
-      puts "Proceeding to the next step..."
-      ret_ind = false
-    when "t"
-      puts "Executing teardown..."
-      retval = 5
-      teardown(driver,screenfile,retval)
-    when "s"
-      puts "Capturing screenshot..."
-      driver.save_screenshot("club18-30.com/#{screen_count}_#{screenfile}")
-      screen_count += 1
-    else
-      puts "Character not recognized! Please push some of those, mantioned in the description!"
-    end
-  end
-end
-
-# Fill the passenger details
-begin
-  url = driver.current_url
-  Selenium::WebDriver::Support::Select.new(driver.find_element(:id => "title_0")).select_by :text, "Mr"
-  driver.find_element(:id, "firstName_0").send_keys "Luke"
-  driver.find_element(:id, "lastName_0").send_keys "Skywalker"
-  Selenium::WebDriver::Support::Select.new(driver.find_element(:id => "passengerFormBean.passengerListForm0.dayOB")).select_by :text, "13"
-  Selenium::WebDriver::Support::Select.new(driver.find_element(:id => "passengerFormBean.passengerListForm0.monthOB")).select_by :text, "June"
-  Selenium::WebDriver::Support::Select.new(driver.find_element(:id => "passengerFormBean.passengerListForm0.yearOB")).select_by :text, "1990"
-
-  Selenium::WebDriver::Support::Select.new(driver.find_element(:id => "title_1")).select_by :text, "Mrs"
-  driver.find_element(:id, "firstName_1").send_keys "Mara"
-  driver.find_element(:id, "lastName_1").send_keys "Skywalker"
-  Selenium::WebDriver::Support::Select.new(driver.find_element(:id => "passengerFormBean.passengerListForm1.dayOB")).select_by :text, "25"
-  Selenium::WebDriver::Support::Select.new(driver.find_element(:id => "passengerFormBean.passengerListForm1.monthOB")).select_by :text, "April"
-  Selenium::WebDriver::Support::Select.new(driver.find_element(:id => "passengerFormBean.passengerListForm1.yearOB")).select_by :text, "1992"
-
-  Postcode = driver.find_element(:id, "postcode")
-  Postcode.location_once_scrolled_into_view
-  Postcode.send_keys "GU24 9DQ"
-
-  driver.find_element(:id, "findAddressButton").click
-  sleep 5
-
-  #Selenium::WebDriver::Support::Select.new(driver.find_element(:id => "addressSelect")).select_by :text, "1 PILGRIMS WAY"
-
-  driver.find_element(:id, "contactNumber").send_keys "02072194272"
-  driver.find_element(:id, "email").send_keys "jediknight@gmail.com"
-  driver.find_element(:id, "confirmEmail").send_keys "jediknight@gmail.com"
-  
-
-    Street = driver.find_element(:id, "streetAddress")
-  Street.location_once_scrolled_into_view
-  unless Street.attribute('value').include? "PILGRIMS WAY"
-    fail "Street box does not contain WOKING"
-  end
-
-  City = driver.find_element(:id, "townCity")
-  City.location_once_scrolled_into_view
-  unless City.attribute('value').include? "WOKING"
-    fail "City box does not contain WOKING"
-  end
-
-  CountryDropdown = driver.find_element(:id, "countrySelect")
-  CountryDropdown.location_once_scrolled_into_view
-  Option = CountryDropdown.find_element(tag_name: "option")
-  unless Option.attribute('value').include? "UK"
-    fail "Country box does not contain United Kingdom"
-  end
-
-  driver.find_element(:id, "houseNumber").send_keys "1"
-  driver.find_element(:xpath, "//input[@value='CONTINUE']").click
-
+  driver.find_element(:name, "checkoutFlow:next").click
 rescue => exception
   ret_ind = true
   while ret_ind == true do 
