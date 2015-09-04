@@ -57,7 +57,7 @@ if url.include? "ww2"
   wait.until { driver.find_element(:id, "st_popup_acceptButton").click }
   driver.find_element(:id, "when").click
   2.times do
-  driver.find_element(:xpath, "//a[@title='→']").click
+  driver.find_element(:xpath, "//a[@data-handler='next']").click
   end
   driver.find_element(:xpath, "//a[@class='ui-state-default']").click
   driver.find_element(:id, "SearchbarForm-submitBtn").click
