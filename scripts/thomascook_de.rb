@@ -6,7 +6,9 @@ require 'io/console'
 
 client = Selenium::WebDriver::Remote::Http::Default.new
 client.timeout = 300
-driver = Selenium::WebDriver.for(:firefox, :http_client => client) 
+profile = Selenium::WebDriver::Firefox::Profile.new
+profile["webdriver.load.strategy"] = "unstable"
+driver = Selenium::WebDriver.for(:firefox, :http_client => client, :profile => profile) 
 retval = 0
 screenfile = "#{Time.now.strftime("%d.%m.%Y__%H'%M'%S")}.jpg"
 ret_ind = true
@@ -16,7 +18,7 @@ FileUtils.mkdir_p 'thomascook.de'
 FileUtils.rm_rf(Dir.glob('thomascook.de/*'))
 
 driver.manage.window.maximize
-driver.manage.timeouts.page_load = 30
+driver.manage.timeouts.page_load = 60
 driver.manage.timeouts.implicit_wait = 30 
 
 def teardown(driver,screenfile,retval)
