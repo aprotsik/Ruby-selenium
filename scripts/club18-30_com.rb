@@ -18,7 +18,7 @@ FileUtils.mkdir_p 'club18-30.com'
 FileUtils.rm_rf(Dir.glob('club18-30.com/*'))
 
 driver.manage.window.maximize
-driver.manage.timeouts.page_load = 30
+driver.manage.timeouts.page_load = 60
 driver.manage.timeouts.implicit_wait = 30 
 
 def teardown(driver,screenfile,retval)
@@ -54,16 +54,32 @@ begin
   url = driver.current_url
   driver.find_element(:xpath, "//div[@class='custom-select departurePoint airportSelect']").click
   driver.find_element(:xpath, "//li[contains(text(), 'London - All Airports - (LON)')]").click
-  driver.find_element(:xpath, "//div[@class='custom-select airportSelect']").click
-  driver.find_element(:xpath, "//li[contains(text(), 'Kardamena, Kos - (KGS)')]").click
 
-  #driver.find_element(:name, "checkInDate").click
-  #2.times do
-  #driver.find_element(:xpath, "//a[@title='Next']").click
-  #end
-  #driver.find_element(:xpath, "//a[@class='ui-state-default']").click
-  driver.find_element(:name, "searchButton").click
+  driver.find_element(:name, "checkInDate").click
+
+  begin
+  driver.find_element(:xpath, "//a[@title='Next']").click
+  month = driver.find_element(:xpath, "//span[@class='ui-datepicker-month']").text
+  end until month == "July"
+
+  driver.find_element(:xpath, "//a[@class='ui-state-default']").click
+
+  location_list = ["LCA" , "KGS" , "CFU" , "ZTH" , "PMI" , "HER" , "IBZ" , "BOJ"]
+  i = 0
+    begin
+      driver.find_element(:xpath, "//div[@class='custom-select airportSelect']").click
+      text = driver.find_element(:xpath, "//li[contains(text(), '#{location_list[i]}')]").text.scan(/[A-Z]{3}/).first
+      puts "#{text}"
+      driver.find_element(:xpath, "//li[contains(text(), '#{location_list[i]}')]").click
+      driver.find_element(:name, "searchButton").click
+      wait = Selenium::WebDriver::Wait.new(:timeout => 60)
+      wait.until { driver.current_url.include? "results?arrival_point=#{text}" }
+      url = driver.current_url
+      i+=1
+    end until url =~ /(.*)\/results(.*)/
+
 rescue => exception
+  puts "#{exception}"
   ret_ind = true
   while ret_ind == true do 
   puts "Exceptional situation occurred. What do you want to do? Press 'r' to retry, do the step manually and then press 'n' to move to the next step, press 's' to capture screenshot, press 't' to terminate the script."
