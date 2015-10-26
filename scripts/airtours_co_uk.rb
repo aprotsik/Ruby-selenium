@@ -16,7 +16,7 @@ FileUtils.mkdir_p 'airtours.co.uk'
 FileUtils.rm_rf(Dir.glob('airtours.co.uk/*'))
 
 driver.manage.window.maximize
-driver.manage.timeouts.page_load = 30
+driver.manage.timeouts.page_load = 60
 driver.manage.timeouts.implicit_wait = 30 
 
 def teardown(driver,screenfile,retval)
@@ -50,16 +50,27 @@ end
 begin
   url = driver.current_url
   driver.find_element(:xpath, "//div[@class='custom-select departurePoint airportSelect']").click
-  driver.find_element(:xpath, "//li[@class='custom-select-option']").click
-  driver.find_element(:xpath, "//div[@class='custom-select airportSelect']").click
-  driver.find_element(:xpath, "//li[@class='custom-select-option optgroup-option']").click
+  driver.find_element(:xpath, "//li[@class='custom-select-option'][3]").click
 
-  #driver.find_element(:name, "checkInDate").click
-  #2.times do
-  #driver.find_element(:xpath, "//a[@title='Next']").click
-  #end
-  #driver.find_element(:xpath, "//a[@class='ui-state-default']").click
-  driver.find_element(:name, "searchButton").click
+  driver.find_element(:name, "checkInDate").click
+  2.times do
+  driver.find_element(:xpath, "//a[@title='Next']").click
+  end
+  driver.find_element(:xpath, "//a[@class='ui-state-default']").click
+
+  i = 1 
+    begin
+      driver.find_element(:xpath, "//div[@class='custom-select airportSelect']").click
+      text = driver.find_element(:xpath, "//li[@class='custom-select-option optgroup-option'][#{i}]").text.scan(/[A-Z]{3}/).first
+      driver.find_element(:xpath, "//li[@class='custom-select-option optgroup-option'][#{i}]").click
+      driver.find_element(:name, "searchButton").click
+      wait = Selenium::WebDriver::Wait.new(:timeout => 60)
+      wait.until { driver.current_url.include? "results?arrival_point=#{text}" }
+      url = driver.current_url
+      i+=1
+    end until url =~ /(.*)\/results(.*)/
+  
+  
 
 rescue => exception
   puts "#{exception}"
