@@ -110,7 +110,7 @@ rescue => exception
       teardown(driver,screenfile,retval)
     when "s"
       puts "Capturing screenshot..."
-      driver.save_screenshot("thomascook.com/#{screen_count}_#{screenfile}")
+      driver.save_screenshot("neckermann.nl/#{screen_count}_#{screenfile}")
       screen_count += 1
     else
       puts "Character not recognized! Please push some of those, mantioned in the description!"  
@@ -141,7 +141,7 @@ rescue => exception
       teardown(driver,screenfile,retval)
     when "s"
       puts "Capturing screenshot..."
-      driver.save_screenshot("thomascook.com/#{screen_count}_#{screenfile}")
+      driver.save_screenshot("neckermann.nl/#{screen_count}_#{screenfile}")
       screen_count += 1
     else
       puts "Character not recognized! Please push some of those, mantioned in the description!"  
@@ -174,7 +174,7 @@ rescue => exception
       teardown(driver,screenfile,retval)
     when "s"
       puts "Capturing screenshot..."
-      driver.save_screenshot("thomascook.com/#{screen_count}_#{screenfile}")
+      driver.save_screenshot("neckermann.nl/#{screen_count}_#{screenfile}")
       screen_count += 1
     else
       puts "Character not recognized! Please push some of those, mantioned in the description!"  
@@ -236,7 +236,7 @@ rescue => exception
       teardown(driver,screenfile,retval)
     when "s"
       puts "Capturing screenshot..."
-      driver.save_screenshot("thomascook.com/#{screen_count}_#{screenfile}")
+      driver.save_screenshot("neckermann.nl/#{screen_count}_#{screenfile}")
       screen_count += 1
     else
       puts "Character not recognized! Please push some of those, mantioned in the description!"  

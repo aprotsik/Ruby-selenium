@@ -12,8 +12,8 @@ screenfile = "#{Time.now.strftime("%d.%m.%Y__%H'%M'%S")}.jpg"
 ret_ind = true
 screen_count = 1
 
-FileUtils.mkdir_p 'neckermann.nl'
-FileUtils.rm_rf(Dir.glob('neckermann.nl/*'))
+FileUtils.mkdir_p 'ww2.neckermann.nl'
+FileUtils.rm_rf(Dir.glob('ww2.neckermann.nl/*'))
 
 driver.manage.window.maximize
 driver.manage.timeouts.page_load = 30
@@ -21,7 +21,7 @@ driver.manage.timeouts.implicit_wait = 30
 
 def teardown(driver,screenfile,retval)
   sleep 5
-  driver.save_screenshot("neckermann.nl/#{screenfile}")
+  driver.save_screenshot("ww2.neckermann.nl/#{screenfile}")
   driver.quit
   exit retval  
 end
@@ -77,7 +77,7 @@ rescue => exception
       teardown(driver,screenfile,retval)
     when "s"
       puts "Capturing screenshot..."
-      driver.save_screenshot("neckermann.nl/#{screen_count}_#{screenfile}")
+      driver.save_screenshot("ww2.neckermann.nl/#{screen_count}_#{screenfile}")
       screen_count += 1
     else
       puts "Character not recognized! Please push some of those, mantioned in the description!"  
@@ -107,7 +107,7 @@ rescue => exception
       teardown(driver,screenfile,retval)
     when "s"
       puts "Capturing screenshot..."
-      driver.save_screenshot("thomascook.com/#{screen_count}_#{screenfile}")
+      driver.save_screenshot("ww2.neckermann.nl/#{screen_count}_#{screenfile}")
       screen_count += 1
     else
       puts "Character not recognized! Please push some of those, mantioned in the description!"  
@@ -138,7 +138,7 @@ rescue => exception
       teardown(driver,screenfile,retval)
     when "s"
       puts "Capturing screenshot..."
-      driver.save_screenshot("thomascook.com/#{screen_count}_#{screenfile}")
+      driver.save_screenshot("ww2.neckermann.nl/#{screen_count}_#{screenfile}")
       screen_count += 1
     else
       puts "Character not recognized! Please push some of those, mantioned in the description!"  
@@ -171,7 +171,7 @@ rescue => exception
       teardown(driver,screenfile,retval)
     when "s"
       puts "Capturing screenshot..."
-      driver.save_screenshot("thomascook.com/#{screen_count}_#{screenfile}")
+      driver.save_screenshot("ww2.neckermann.nl/#{screen_count}_#{screenfile}")
       screen_count += 1
     else
       puts "Character not recognized! Please push some of those, mantioned in the description!"  
@@ -233,7 +233,7 @@ rescue => exception
       teardown(driver,screenfile,retval)
     when "s"
       puts "Capturing screenshot..."
-      driver.save_screenshot("thomascook.com/#{screen_count}_#{screenfile}")
+      driver.save_screenshot("ww2.neckermann.nl/#{screen_count}_#{screenfile}")
       screen_count += 1
     else
       puts "Character not recognized! Please push some of those, mantioned in the description!"  
