@@ -72,7 +72,7 @@ begin
       puts "#{text}"
       driver.find_element(:xpath, "//li[contains(text(), '#{location_list[i]}')]").click
       driver.find_element(:name, "searchButton").click
-      wait = Selenium::WebDriver::Wait.new(:timeout => 60)
+      wait = Selenium::WebDriver::Wait.new(:timeout => 120)
       wait.until { driver.current_url.include? "results?arrival_point=#{text}" }
       url = driver.current_url
       i+=1
