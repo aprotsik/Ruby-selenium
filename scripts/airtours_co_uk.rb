@@ -59,6 +59,7 @@ begin
   driver.find_element(:xpath, "//a[@title='Next']").click
   end
   
+  driver.find_element(:xpath, "//a[@class='ui-state-default']").click
 
   i = 1 
     begin
