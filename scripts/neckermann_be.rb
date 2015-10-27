@@ -52,7 +52,7 @@ begin
   url = driver.current_url
   Selenium::WebDriver::Support::Select.new(driver.find_element(:id => "qsmNumberOfAdults_room_1")).select_by :value, "2"
   Selenium::WebDriver::Support::Select.new(driver.find_element(:id => "qsmNumberOfChildren_room_1")).select_by :value, "0"
-  driver.find_element(:id, "QsmListerOrFullTextSearch_/sitecore/content/eComHome/Configuration/Common/Components/Redesign/SOLR/QSM_label").click
+  driver.find_element(:id, "QsmListerOrFullTextSearch_/sitecore/content/eComHome/Configuration/Common/Components/QSM/SOLR/VelocityQsmMainFlight_label").click
 rescue => exception
   ret_ind = true
   while ret_ind == true do 
