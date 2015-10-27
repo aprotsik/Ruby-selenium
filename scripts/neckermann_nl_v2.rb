@@ -16,7 +16,7 @@ FileUtils.mkdir_p 'ww2.neckermann.nl'
 FileUtils.rm_rf(Dir.glob('ww2.neckermann.nl/*'))
 
 driver.manage.window.maximize
-driver.manage.timeouts.page_load = 30
+driver.manage.timeouts.page_load = 120
 driver.manage.timeouts.implicit_wait = 30 
 
 def teardown(driver,screenfile,retval)

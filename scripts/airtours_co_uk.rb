@@ -6,7 +6,9 @@ require 'io/console'
 
 client = Selenium::WebDriver::Remote::Http::Default.new
 client.timeout = 300
-driver = Selenium::WebDriver.for(:firefox, :http_client => client) 
+profile = Selenium::WebDriver::Firefox::Profile.new
+profile.native_events = false
+driver = Selenium::WebDriver.for(:firefox, :http_client => client, :profile => profile) 
 retval = 0
 screenfile = "#{Time.now.strftime("%d.%m.%Y__%H'%M'%S")}.jpg"
 ret_ind = true
@@ -16,7 +18,7 @@ FileUtils.mkdir_p 'airtours.co.uk'
 FileUtils.rm_rf(Dir.glob('airtours.co.uk/*'))
 
 driver.manage.window.maximize
-driver.manage.timeouts.page_load = 60
+driver.manage.timeouts.page_load = 120
 driver.manage.timeouts.implicit_wait = 30 
 
 def teardown(driver,screenfile,retval)
@@ -49,14 +51,14 @@ end
 # Click search button
 begin
   url = driver.current_url
-  driver.find_element(:xpath, "//div[@class='custom-select departurePoint airportSelect']").click
+  sleep 10
+  driver.find_element(:id, "idf-custom-select").click
   driver.find_element(:xpath, "//li[@class='custom-select-option'][3]").click
-
   driver.find_element(:name, "checkInDate").click
   2.times do
   driver.find_element(:xpath, "//a[@title='Next']").click
   end
-  driver.find_element(:xpath, "//a[@class='ui-state-default']").click
+  
 
   i = 1 
     begin
