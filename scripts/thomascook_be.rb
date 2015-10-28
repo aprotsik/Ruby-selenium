@@ -49,6 +49,7 @@ end
 
 # Click search button
 begin
+  puts "Performing search..."
   url = driver.current_url
   Selenium::WebDriver::Support::Select.new(driver.find_element(:id => "qsmNumberOfAdults")).select_by :value, "2"
   Selenium::WebDriver::Support::Select.new(driver.find_element(:id => "qsmNumberOfChildren")).select_by :value, "0"
@@ -82,6 +83,7 @@ end
 
 # Click the first details button
 begin
+  puts "Choosing search result..."
   url = driver.current_url
   Selenium::WebDriver::Support::Select.new(driver.find_element(:id => "QsmChangeSelect_prXmonth")).select_by :index, "4"
   sleep 3
@@ -115,38 +117,9 @@ end
 
 #Click Book now
 begin
+  puts "Booking..."
   url = driver.current_url
   driver.find_element(:id, "calcbuttonspan_calc").click
-rescue => exception
-  ret_ind = true
-  while ret_ind == true do 
-  puts "Exceptional situation occurred. What do you want to do? Press 'r' to retry, do the step manually and then press 'n' to move to the next step, press 's' to capture screenshot, press 't' to terminate the script."
-   c = read_char
-  case c
-    when "r"
-      puts "Retrying..."
-      driver.navigate.refresh
-      retry
-    when "n"
-      puts "Proceeding to the next step..."
-      ret_ind = false
-    when "t"
-      puts "Executing teardown..."
-      retval = 5
-      teardown(driver,screenfile,retval)
-    when "s"
-      puts "Capturing screenshot..."
-      driver.save_screenshot("thomascook.be/#{screen_count}_#{screenfile}")
-      screen_count += 1
-    else
-      puts "Character not recognized! Please push some of those, mantioned in the description!"  
-    end
-  end
-end
-
-#Click another Book now
-begin
-  url = driver.current_url
   driver.find_element(:xpath, "//span[@class='label bookNowButton']").click
 rescue => exception
   ret_ind = true
@@ -177,6 +150,7 @@ end
 
 # Fill the passenger details
 begin
+  puts "Filling passenger details..."
   url = driver.current_url
   Selenium::WebDriver::Support::Select.new(driver.find_element(:id => "TravellerDetails_1_gender")).select_by :value, "Male"
   driver.find_element(:id, "TravellerDetails_1_firstName").send_keys "Luke"
@@ -210,6 +184,7 @@ end
 
 #Click Next button
 begin
+  puts "Trip details..."
   url = driver.current_url
   driver.find_element(:id, "btnNext").click
 rescue => exception
@@ -241,6 +216,7 @@ end
 
 # Fill the passenger details (more)
 begin
+  puts "More passenger details..."
   url = driver.current_url
   driver.find_element(:id, "TravellerDetails_1_street").send_keys "Rokin"
   driver.find_element(:id, "TravellerDetails_1_houseNumber").send_keys "1"

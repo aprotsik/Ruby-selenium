@@ -52,6 +52,7 @@ if url.include? "ww2"
   then
 
   begin
+  "Performing search..."
   url = driver.current_url
   wait = Selenium::WebDriver::Wait.new(:timeout => 5)
   wait.until { driver.find_element(:id, "st_popup_acceptButton").click }
@@ -89,6 +90,7 @@ rescue => exception
 end
 
 begin
+  puts "Choosing search result..."
   url = driver.current_url
   driver.find_element(:xpath, "//a[@class='btn btn-success detailsBtn']").click
 rescue => exception
@@ -119,6 +121,7 @@ rescue => exception
 end
 
 begin
+  puts "Booking..."
   url = driver.current_url
   driver.find_element(:id, "bookNow").click
   #driver.find_element(:id, "submit-extras").click
@@ -150,6 +153,7 @@ rescue => exception
 end
 
 begin
+  puts "Trip customizing..."
   url = driver.current_url
   sleep 2
   driver.find_element(:id, "submit-extras").location_once_scrolled_into_view
@@ -183,6 +187,7 @@ rescue => exception
 end
 
 begin
+  puts "Filling passenger details..."
   url = driver.current_url
   #sleep 1
   #driver.find_element(:id => "title").click
@@ -248,6 +253,7 @@ else
 
 # Click search button
 begin
+  puts "Performing search..."
   url = driver.current_url
   wait = Selenium::WebDriver::Wait.new(:timeout => 5)
   wait.until { driver.find_element(:id, "st_popup_acceptButton").click }
@@ -284,6 +290,7 @@ end
 
 # Click the first details button
 begin
+  puts "Choosing search result..."
   url = driver.current_url
   driver.find_element(:xpath, "//span[@class='label']").click
 rescue => exception
@@ -318,6 +325,7 @@ if url.include? "NadDetailPage"
 
 #Click Book now
 begin
+  puts "Booking..."
   #url = driver.current_url
   driver.find_element(:id, "#tabBar-Prices2").click
   driver.find_element(:xpath, "(//a[contains(@data-room, '1')])").click
@@ -352,6 +360,7 @@ end
 else
 #Click another Book now
 begin
+  puts "Trip customizing..."
   #url = driver.current_url
   driver.find_element(:id, "calcbuttonspan_extra").click
   driver.find_element(:xpath, "//span[@class='label bookNowButton']").click
@@ -386,6 +395,7 @@ end
 
 # Fill the passenger details
 begin
+  puts "Filling passenger details..."
   url = driver.current_url
   Selenium::WebDriver::Support::Select.new(driver.find_element(:id => "TravellerDetails_1_gender")).select_by :value, "Male"
   driver.find_element(:id, "TravellerDetails_1_firstName").send_keys "Luke"
@@ -430,6 +440,7 @@ end
 
 #Click Next button
 begin
+  puts "Some trip information..."
   url = driver.current_url
   driver.find_element(:id, "btnNext").click
 rescue => exception
@@ -461,6 +472,7 @@ end
 
 # Fill the passenger details (more)
 begin
+  puts "More passenger detail..."
   url = driver.current_url
   driver.find_element(:id, "TravellerDetails_1_street").send_keys "Rokin"
   driver.find_element(:id, "TravellerDetails_1_houseNumber").send_keys "1"
@@ -502,6 +514,7 @@ end
 
 #Click Agree to pay
 begin
+  puts "Pay agreement..."
   url = driver.current_url
   driver.find_element(:id, "NlPayAgreement").click
   driver.find_element(:id, "defaultPaymentAgreed_label").click

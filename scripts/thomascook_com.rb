@@ -49,6 +49,7 @@ end
 
 # Click search button
 begin
+  puts "Performing search..."
   url = driver.current_url
   driver.find_element(:id, "when").click
   2.times do
@@ -86,6 +87,7 @@ end
 
 # Click the first details button
 begin
+  puts "Choosing search result..."
   url = driver.current_url
   driver.find_element(:xpath, "//a[@class='btn btn-success detailsBtn']").click
 rescue => exception
@@ -117,6 +119,7 @@ end
 
 #Click Book now
 begin
+  puts "Booking..."
   url = driver.current_url
   driver.find_element(:id, "bookNow").click
   #driver.find_element(:id, "submit-extras").click
@@ -156,6 +159,7 @@ end
 
 # Continue to signing forms
 begin
+  puts "Customizing holiday..."
   url = driver.current_url
   sleep 2
   driver.find_element(:id, "submit-extras").location_once_scrolled_into_view
@@ -190,6 +194,7 @@ end
 
 # Fill the passenger details
 begin
+  puts "Entering passenger details..."
   url = driver.current_url
   #sleep 1
   #driver.find_element(:id => "title").click

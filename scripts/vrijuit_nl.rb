@@ -48,6 +48,7 @@ end
 
 # Click search button
 begin
+  puts "Performing search..."
   url = driver.current_url
   #driver.find_element(:id, "st_popup_acceptButton").click
   Selenium::WebDriver::Support::Select.new(driver.find_element(:id => "qsmNumberOfAdults")).select_by :value, "2"
@@ -82,6 +83,7 @@ end
 
 # Click the first details button
 begin
+  puts "Choosing search result..."
   driver.find_element(:id, "st_popup_acceptButton").click
   driver.find_element(:xpath, "//span[@class='label']").click
 rescue => exception
@@ -116,6 +118,7 @@ url = driver.current_url
 if url.include? "NadDetailPage"
 
 begin
+  puts "Booking..."
   driver.find_element(:id, "#tabBar-Prices2").click
   driver.find_element(:xpath, "(//a[contains(@data-room, '1')])").click
   driver.find_element(:id, "priceTicket-submitButton").click
@@ -149,6 +152,7 @@ end
 else
 
 begin
+  puts "Booking..."
   driver.find_element(:id, "calcbuttonspan_calc").click
   driver.find_element(:xpath, "//span[@class='label bookNowButton']").click
 rescue => exception
@@ -183,6 +187,7 @@ end
 if driver.find_element(:class => "booking-personalia-contactperson").text.include? "contactpersoon"
 # Fill the passenger details
 begin
+  puts "Filling passenger details..."
   url = driver.current_url
   driver.find_element(:id => "TravellerDetails_1_gender").click
   Selenium::WebDriver::Support::Select.new(driver.find_element(:id => "TravellerDetails_1_gender")).select_by :value, "Male"
@@ -242,6 +247,7 @@ end
 
 #Click Next button
 begin
+  puts "Trip details..."
   url = driver.current_url
   driver.find_element(:id, "btnNext").click
 rescue => exception
@@ -274,6 +280,7 @@ end
 
 # Fill the passenger details (more)
 begin
+  puts "More passenger details..."
   url = driver.current_url
   driver.find_element(:id, "TravellerDetails_1_street").send_keys "Rokin"
   driver.find_element(:id, "TravellerDetails_1_houseNumber").send_keys "1"
@@ -315,6 +322,7 @@ end
 
 #Click Agree to pay
 begin
+  puts "Payment agreement..."
   url = driver.current_url
   driver.find_element(:id, "NlPayAgreement").click
   driver.find_element(:id, "defaultPaymentAgreed_label").click
@@ -348,6 +356,7 @@ end
 else
 
 begin
+  puts "Filling passenger details..."
   url = driver.current_url
   driver.find_element(:class => "radio").click
   driver.find_element(:id, "TravellerDetails_1_firstName").clear

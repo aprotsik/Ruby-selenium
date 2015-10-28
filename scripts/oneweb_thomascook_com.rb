@@ -49,6 +49,7 @@ end
 
 # Login as guest
 begin
+  puts "Entering site as guest..."
   url = driver.current_url
   driver.find_element(:id, "testLogin").click
 rescue => exception
@@ -80,6 +81,7 @@ end
 
 # Click Search
 begin
+  puts "Performing search..."
   url = driver.current_url
   time = Time.now + (4*7*24*60*60)
   date = time.strftime("%d-%m-%Y")
@@ -116,6 +118,7 @@ end
 
 #Select resort
 begin
+  puts "Choosing search result..."
   url = driver.current_url
   driver.find_element(:xpath, "//a[@class='fontIcon-arrow-right']").click
 rescue => exception
@@ -147,6 +150,7 @@ end
 
 # Click checkout
 begin
+  puts "Proceeding to checkout..."
   url = driver.current_url
   driver.find_element(:xpath, "//a[@class='book']").click
 rescue => exception
@@ -178,6 +182,7 @@ end
 
 # Accept terms & Click continue booking
 begin
+  puts "Accepting terms..."
   url = driver.current_url
   #driver.find_element(:id, "errataTerms").click
   #driver.find_element(:id, "acceptErata").click

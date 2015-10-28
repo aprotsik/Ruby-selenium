@@ -49,6 +49,7 @@ end
   url = driver.current_url
 
   begin
+  puts "Performing search..."
   url = driver.current_url
   wait = Selenium::WebDriver::Wait.new(:timeout => 5)
   wait.until { driver.find_element(:id, "st_popup_acceptButton").click }
@@ -86,6 +87,7 @@ rescue => exception
 end
 
 begin
+  puts "Choosing search result..."
   url = driver.current_url
   driver.find_element(:xpath, "//a[@class='btn btn-success detailsBtn']").click
 rescue => exception
@@ -116,6 +118,7 @@ rescue => exception
 end
 
 begin
+  puts "Booking..."
   url = driver.current_url
   driver.find_element(:id, "bookNow").click
   #driver.find_element(:id, "submit-extras").click
@@ -147,6 +150,7 @@ rescue => exception
 end
 
 begin
+  puts "Trip customizing..."
   url = driver.current_url
   sleep 5
   driver.find_element(:id, "submit-extras").location_once_scrolled_into_view
@@ -180,6 +184,7 @@ rescue => exception
 end
 
 begin
+  puts "Filling passenger details..."
   url = driver.current_url
   sleep 5
   #driver.find_element(:id => "title").click

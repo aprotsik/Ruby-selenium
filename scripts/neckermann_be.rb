@@ -49,6 +49,7 @@ end
 
 # Click search button
 begin
+  puts "Performing search..."
   url = driver.current_url
   Selenium::WebDriver::Support::Select.new(driver.find_element(:id => "qsmNumberOfAdults_room_1")).select_by :value, "2"
   Selenium::WebDriver::Support::Select.new(driver.find_element(:id => "qsmNumberOfChildren_room_1")).select_by :value, "0"
@@ -82,6 +83,7 @@ end
 
 # Click the first details button
 begin
+  puts "Choosing search result..."
   url = driver.current_url
   driver.find_element(:css, "#QsmDetailLink_1 > span.label").click
 rescue => exception
@@ -113,6 +115,7 @@ end
 
 #Click Book now
 begin
+  puts "Proceeding to checkout..."
   url = driver.current_url
   driver.find_element(:id, "calcbuttonspan_calc").click
   driver.find_element(:xpath, "//span[@class='label bookNowButton']").click
@@ -145,6 +148,7 @@ end
 
 # Fill the passenger details
 begin
+  puts "Filling passenger details..."
   url = driver.current_url
   sleep 5
   driver.find_element(:id => "TravellerDetails_1_gender").click
@@ -197,6 +201,7 @@ end
 
 #Click Next button
 begin
+  puts "Some tour information..."
   url = driver.current_url
   driver.find_element(:id, "btnNext").click
   driver.find_element(:id, "optionsandextrasInsurancePopupYesBtn").click
@@ -229,6 +234,7 @@ end
 
 # Fill the passenger details (more)
 begin
+  puts "More passenger details..."
   url = driver.current_url
   driver.find_element(:id, "TravellerDetails_1_street").send_keys "Rokin"
   driver.find_element(:id, "TravellerDetails_1_houseNumber").send_keys "1"

@@ -50,10 +50,11 @@ end
 
 # Click search button
 begin
+  puts "Performing search..."
   url = driver.current_url
-  sleep 10
   driver.find_element(:id, "idf-custom-select").click
   driver.find_element(:xpath, "//li[@class='custom-select-option'][3]").click
+  sleep 2
   driver.find_element(:name, "checkInDate").click
   2.times do
   driver.find_element(:xpath, "//a[@title='Next']").click
@@ -105,6 +106,7 @@ end
 
 # Click the first details button
 begin
+  puts "Choosing search result..."
   url = driver.current_url
   driver.find_element(:name, "conflictResolvePanel:placeHolder:form:costButton").click
 rescue => exception
@@ -136,6 +138,7 @@ end
 
 #Click Book now
 begin
+  puts "Proceeding to checkout..."
   url = driver.current_url
   driver.find_element(:name, "checkoutFlow:next").click
 rescue => exception

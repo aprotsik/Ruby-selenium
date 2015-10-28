@@ -51,6 +51,7 @@ end
 
 # Click search button
 begin
+  puts "Performing search..."
   url = driver.current_url
   driver.find_element(:xpath, "//div[@class='custom-select departurePoint airportSelect']").click
   driver.find_element(:xpath, "//li[contains(text(), 'London - All Airports - (LON)')]").click
@@ -108,6 +109,7 @@ end
 
 # Click the first details button
 begin
+  puts "Choosing search result..."
   url = driver.current_url
   driver.find_element(:name, "conflictResolvePanel:placeHolder:form:costButton").click
 rescue => exception
@@ -139,6 +141,7 @@ end
 
 #Click Book now
 begin
+  puts "Proceeding to checkout..."
   url = driver.current_url
   driver.find_element(:name, "checkoutFlow:next").click
 rescue => exception
