@@ -198,7 +198,7 @@ begin
   driver.find_element(:id, "leadPassengerConfirmEmail").send_keys "jediknight@gmail.com"
   driver.find_element(:id, "street").send_keys "Rokin"
   driver.find_element(:id, "houseNumber").send_keys "1"
-  driver.find_element(:id, "postCode").send_keys "1012 KT"
+  driver.find_element(:id, "postCode").send_keys "1012KT"
   driver.find_element(:id, "city").send_keys "Amsterdam"
   
   Selenium::WebDriver::Support::Select.new(driver.find_element(:id => "day")).select_by :text, "13"
@@ -476,7 +476,7 @@ begin
   url = driver.current_url
   driver.find_element(:id, "TravellerDetails_1_street").send_keys "Rokin"
   driver.find_element(:id, "TravellerDetails_1_houseNumber").send_keys "1"
-  driver.find_element(:id, "TravellerDetails_1_zipCode").send_keys "1012 KT"
+  driver.find_element(:id, "TravellerDetails_1_zipCode").send_keys "1012KT"
   driver.find_element(:id, "TravellerDetails_1_city").send_keys "Amsterdam"
   driver.find_element(:id, "TravellerDetails_1_phoneNumber").send_keys "+31 30 2357822"
   driver.find_element(:id, "TravellerDetails_1_email1").send_keys "luke.skywalker@gmail.com"
