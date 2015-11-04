@@ -2,6 +2,8 @@ require 'selenium-webdriver'
 require 'fileutils'
 require 'io/console'
 
+# Method, which creates the instance of webdriver, tuning some of it's parameters and defines some major variables. 
+
 def start_webdriver(sitename)
 	client = Selenium::WebDriver::Remote::Http::Default.new
 	client.timeout = 300
@@ -13,10 +15,11 @@ def start_webdriver(sitename)
 	FileUtils.mkdir_p "#{sitename}"
 	FileUtils.rm_rf(Dir.glob("#{sitename}/*"))
 	@driver.manage.window.maximize
-	@driver.manage.timeouts.page_load = 120
-	@driver.manage.timeouts.implicit_wait = 60 
-	return @driver
+	@driver.manage.timeouts.page_load = 120 # Page load timeout.
+	@driver.manage.timeouts.implicit_wait = 60 # Default timeout to look for element. Can be overriddent, if explicit wait is used. (wait object instance, created right before the driver.find_element)
 end
+
+# Method, which terminates webdriver object instance, saving the screenshot of success or failure.
 
 def stop_webdriver(driver,screenfile,retval,sitename)
   	sleep 5
@@ -24,6 +27,8 @@ def stop_webdriver(driver,screenfile,retval,sitename)
   	driver.quit
   	exit retval  
 end
+
+# Method, responsible for user input.
 
 def read_char
 	STDIN.echo = false
@@ -38,6 +43,8 @@ def read_char
   		STDIN.cooked!
   	return input
 end
+
+# Error handling method, which allows several way of dealing with exceptional situations.
 
 def exception_handler(exception,sitename)
   @retry_flag = false
