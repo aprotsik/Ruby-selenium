@@ -58,7 +58,7 @@ begin
   puts "Filling passenger details..."
   url = @driver.current_url
   sleep 5
-  Selenium::WebDriver::Support::Select.new(@driver.find_element(:id => "TravellerDetails_1_gender")).select_by :value, "Male"
+  #Selenium::WebDriver::Support::Select.new(@driver.find_element(:id => "TravellerDetails_1_gender")).select_by :value, "Male"
   @driver.find_element(:id, "TravellerDetails_1_firstName").send_keys "Luke"
   @driver.find_element(:id, "TravellerDetails_1_lastName").send_keys "Skywalker"
   Selenium::WebDriver::Support::Select.new(@driver.find_element(:id => "TravellerDetails_1_days")).select_by :value, "13"
@@ -72,9 +72,7 @@ begin
   Selenium::WebDriver::Support::Select.new(@driver.find_element(:id => "TravellerDetails_2_years")).select_by :value, "1992"
   @driver.find_element(:id, "foSubmit").click
   
-  if @driver.page_source.include? "Remplissez les champs obligatoires."
-    fail "There are some empty fields!"
-  end
+  fail "There are some empty fields!" if @driver.page_source.include? "Remplissez les champs obligatoires."
 
 rescue => exception
   exception_handler(exception,sitename)
