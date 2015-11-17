@@ -71,6 +71,10 @@ begin
   Selenium::WebDriver::Support::Select.new(@driver.find_element(:id => "TravellerDetails_2_months")).select_by :value, "4"
   Selenium::WebDriver::Support::Select.new(@driver.find_element(:id => "TravellerDetails_2_years")).select_by :value, "1992"
   @driver.find_element(:id, "foSubmit").click
+  
+  if @driver.page_source.include? "Remplissez les champs obligatoires."
+    fail "There are some empty fields!"
+  end
 
 rescue => exception
   exception_handler(exception,sitename)
